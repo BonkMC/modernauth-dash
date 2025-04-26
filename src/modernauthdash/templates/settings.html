@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card settings">
+    <h2>API Key Management</h2>
+    <p class="settings__current">
+      Current API Key:
+      <strong id="apiKeyDisplay">{{ api_key }}</strong>
+    </p>
+    <button id="resetBtn" class="btn btn--primary">Reset API Key</button>
+    <p id="msg" class="settings__msg"></p>
+  </div>
+{% endblock %}

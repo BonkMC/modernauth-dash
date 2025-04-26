@@ -1,0 +1,10 @@
+LICENSE.md
+pyproject.toml
+setup.py
+src/modernauthdash/__init__.py
+src/modernauthdash/app.py
+src/modernauthdash.egg-info/PKG-INFO
+src/modernauthdash.egg-info/SOURCES.txt
+src/modernauthdash.egg-info/dependency_links.txt
+src/modernauthdash.egg-info/requires.txt
+src/modernauthdash.egg-info/top_level.txt

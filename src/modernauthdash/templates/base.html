@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ModernAuth Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <div class="sidebar__logo">
+        <a href="{{ url_for('dashboard') }}">
+          <img src="{{ url_for('static', filename='assets/ma_logo.png') }}"
+               alt="ModernAuth Logo" />
+        </a>
+      </div>
+      <ul class="sidebar__nav">
+        <li class="{{ 'active' if active=='dashboard' else '' }}">
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </li>
+        <li class="{{ 'active' if active=='analytics' else '' }}">
+          <a href="{{ url_for('analytics') }}">Analytics</a>
+        </li>
+        <li class="{{ 'active' if active=='settings' else '' }}">
+          <a href="{{ url_for('settings') }}">Settings</a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <header class="main__header">
+        <h1>{{ active|capitalize }}</h1>
+      </header>
+      <section class="main__content">
+        {% block content %}{% endblock %}
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

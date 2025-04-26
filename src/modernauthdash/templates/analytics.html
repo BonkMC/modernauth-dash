@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="stats-container">
+    <div class="stats-box stats-box--purple">
+      <div class="stats-box__label">Percentage of players using ModernAuth</div>
+      <div class="stats-box__value">{{ percent_using }}%</div>
+    </div>
+    <div class="stats-box stats-box--green">
+      <div class="stats-box__label">Number of players currently using ModernAuth</div>
+      <div class="stats-box__value">{{ number_using }}</div>
+    </div>
+    <div class="stats-box stats-box--blue">
+      <div class="stats-box__label">Percentage of free players quota used</div>
+      <div class="stats-box__value">{{ percent_quota }}%</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Number of players using ModernAuth</h2>
+    <canvas id="myChart" height="200"></canvas>
+  </div>
+{% endblock %}

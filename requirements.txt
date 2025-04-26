@@ -1,0 +1,5 @@
+#-e .
+Flask>=2.0
+Flask-Limiter>=2.0
+python-dotenv>=0.19
+watchdog<2.1
