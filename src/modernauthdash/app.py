@@ -22,7 +22,7 @@ app = Flask(
 )
 app.secret_key = os.getenv("APP_SECRET_KEY") or 'dev_secret_key'
 
-BACKEND_URL           = os.getenv("BACKEND_URL", "https://auth.bonkmc.org")
+BACKEND_URL           = os.getenv("BACKEND_URL")
 DASHBOARD_ID          = os.getenv("DASHBOARD_ID")
 DASHBOARD_ACCESS_CODE = os.getenv("DASHBOARD_ACCESS_CODE")
 
