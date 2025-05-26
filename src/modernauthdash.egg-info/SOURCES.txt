@@ -8,3 +8,4 @@ src/modernauthdash.egg-info/SOURCES.txt
 src/modernauthdash.egg-info/dependency_links.txt
 src/modernauthdash.egg-info/requires.txt
 src/modernauthdash.egg-info/top_level.txt
+src/modernauthdash/db/dashdb.py

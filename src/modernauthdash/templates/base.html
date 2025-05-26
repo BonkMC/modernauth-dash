@@ -8,6 +8,8 @@
 </head>
 <body>
   <div class="container">
+    {% set ud = user_data if (user_data is defined) else {} %}
+
     <nav class="sidebar">
       <div class="sidebar__logo">
         <a href="{{ url_for('dashboard') }}">
@@ -19,26 +21,36 @@
         <li class="{{ 'active' if active=='dashboard' else '' }}">
           <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </li>
-        <li class="{{ 'active' if active=='analytics' else '' }}">
-          <a href="{{ url_for('analytics') }}">Analytics</a>
-        </li>
+        {% if ud.get('owned_server') %}
         <li class="{{ 'active' if active=='settings' else '' }}">
           <a href="{{ url_for('settings') }}">Settings</a>
         </li>
+        {% endif %}
       </ul>
     </nav>
 
-    <main class="main">
+    <div class="main">
       <header class="main__header">
         <h1>{{ active|capitalize }}</h1>
       </header>
-      <section class="main__content">
+      <main class="main__content">
         {% block content %}{% endblock %}
-      </section>
-    </main>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal overlay (hidden by default) -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <button id="modal-close" class="btn">×</button>
+      <h3 id="modal-title"></h3>
+      <div id="modal-body"></div>
+      <div class="modal-actions"></div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  {% block extra_js %}{% endblock %}
   <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

@@ -1,7 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
+  {% set ud = user_data or {} %}
+
   <div class="card">
     <h2>Welcome, {{ user }}!</h2>
-    <p>This is your ModernAuth Dashboard.  Use the sidebar to view analytics or settings.</p>
+
+    {% if ud.get('owned_server') %}
+      <p>Your Server ID: <strong>{{ ud.get('owned_server') }}</strong></p>
+
+      <!-- Inline Analytics Widgets -->
+      <div class="stats-container">
+        <div class="stats-box stats-box--purple">
+          <div class="stats-box__label">Percentage of players using ModernAuth</div>
+          <div class="stats-box__value">{{ percent_using }}%</div>
+        </div>
+        <div class="stats-box stats-box--green">
+          <div class="stats-box__label">Number of players currently using ModernAuth</div>
+          <div class="stats-box__value">{{ number_using }}</div>
+        </div>
+        <div class="stats-box stats-box--blue">
+          <div class="stats-box__label">Percentage of free players quota used</div>
+          <div class="stats-box__value">{{ percent_quota }}%</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Number of players using ModernAuth</h2>
+        <canvas id="myChart" height="200"></canvas>
+      </div>
+
+    {% else %}
+      <form id="createForm" method="POST">
+        <h3>Set up your Server</h3>
+        <input
+          class="settings__input"
+          name="server_id"
+          placeholder="Enter desired server ID"
+          required
+        >
+        <button type="submit" class="btn btn--primary">
+          Create Server
+        </button>
+      </form>
+    {% endif %}
   </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    const CREATE_SERVER_URL = "{{ create_server_url }}";
+  </script>
 {% endblock %}

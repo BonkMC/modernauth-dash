@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
+  {% set ud = user_data or {} %}
   <div class="card settings">
-    <h2>API Key Management</h2>
-    <p class="settings__current">
-      Current API Key:
-      <strong id="apiKeyDisplay">{{ api_key }}</strong>
-    </p>
-    <button id="resetBtn" class="btn btn--primary">Reset API Key</button>
-    <p id="msg" class="settings__msg"></p>
+    <h2>Server Management</h2>
+  <br>
+    {% if ud.get('owned_server') %}
+      <p>Server ID: <strong>{{ ud.get('owned_server') }}</strong></p>
+        <br>
+      <button
+        id="resetServerCodeBtn"
+        data-server="{{ ud.get('owned_server') }}"
+        class="btn btn--primary"
+      >
+        Reset Server Access Code
+      </button>
+        <br>
+      <button
+        id="removeServerBtn"
+        data-server="{{ ud.get('owned_server') }}"
+        class="btn"
+      >
+        Remove Server
+      </button>
+      <p id="serverMsg" class="settings__msg"></p>
+    {% else %}
+      <p>You don’t own a server yet. Go to Dashboard to create one.</p>
+    {% endif %}
   </div>
 {% endblock %}
