@@ -3,7 +3,6 @@ from sqlalchemy.exc import SQLAlchemyError
 
 class DashboardDB:
     def __init__(self, mysql_connection, hash_function):
-        # ensure PyMySQL URL scheme
         mysql_connection = mysql_connection.replace("mysql://", "mysql+pymysql://")
         self.engine = create_engine(mysql_connection, echo=False)
         self.metadata = MetaData()
@@ -20,7 +19,6 @@ class DashboardDB:
         self.metadata.create_all(self.engine)
 
     def get_user(self, username):
-        # if someone accidentally passed in the full user-dict, extract just the string
         if isinstance(username, dict):
             username = username.get('username')
         try:
@@ -30,14 +28,12 @@ class DashboardDB:
                 row = result.mappings().first()
                 return dict(row) if row else None
         except (SQLAlchemyError, TypeError) as e:
-            # log and return None instead of raising a 500
             print(f"[dashdb.get_user] error fetching '{username}': {e}")
             return None
 
     def set_user(self, username, data):
         try:
             with self.engine.begin() as conn:
-                # insert-or-ignore
                 conn.execute(
                     self.users.insert()
                     .values(
@@ -49,7 +45,6 @@ class DashboardDB:
                     )
                     .prefix_with('IGNORE')
                 )
-                # then always update
                 conn.execute(
                     self.users.update()
                     .where(self.users.c.username == username)

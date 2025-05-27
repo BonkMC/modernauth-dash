@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.classList.add('hidden');
   }
 
-  // ensure it starts hidden
   hideModal();
 
   closeBtn.addEventListener('click', hideModal);
@@ -180,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const acMsg     = document.getElementById('accessCodeMsg');
   if (resetACBtn) {
     resetACBtn.addEventListener('click', () => {
-      fetch('/api/reset_key', { method: 'POST' })
+      fetch('/api/reset_server_code', { method: 'POST' })
         .then(r => r.json())
         .then(j => {
           if (j.status === 'success') {

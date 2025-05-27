@@ -76,18 +76,15 @@ def auth_callback():
     return redirect(url_for('dashboard'))
 
 
-# ←— GET & POST to “/”, routing POST into create_server
 @app.route('/', methods=["GET", "POST"])
 def dashboard():
     if request.method == 'POST':
         return api_create_server()
 
-    # Pull username from session and coerce if it's a dict
     username = session.get('user')
     if isinstance(username, dict):
         username = username.get('username')
         session['user'] = username
-    # Debug log to verify type/value
     print(f"session['user'] type: {type(session['user'])}, value: {session['user']}")
 
     if not username:
@@ -151,29 +148,6 @@ def api_create_server():
         'secret_key': secret
     }), 200
 
-
-@app.route('/analytics')
-def analytics():
-    username = session.get('user')
-    if not username:
-        return redirect(url_for('login_redirect'))
-
-    user_data = db.get_user(username) or {}
-    percent_using = 37
-    number_using  = 278
-    percent_quota = 12
-
-    return render_template(
-        'analytics.html',
-        active='analytics',
-        user=username,
-        user_data=user_data,
-        percent_using=percent_using,
-        number_using=number_using,
-        percent_quota=percent_quota
-    )
-
-
 @app.route('/settings')
 def settings():
     username = session.get('user')
@@ -189,14 +163,6 @@ def settings():
     )
 
 
-@app.route('/api/reset_key', methods=['POST'])
-def api_reset_key():
-    if 'user' not in session:
-        return jsonify({'status':'error'}), 401
-
-    new_key = secrets.token_urlsafe(32)
-    session['api_key'] = new_key
-    return jsonify({'status':'success','api_key':new_key})
 
 
 @app.route('/api/reset_server_code', methods=['POST'])

@@ -11,7 +11,6 @@
   --border-color: #333333;
 }
 
-/* Reset & globals */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,10 +23,8 @@ body, html {
   color: var(--text-color);
 }
 
-/* Layout */
 .container { display: flex; height: 100%; }
 
-/* Sidebar */
 .sidebar {
   width: 240px; background: var(--sidebar-bg);
   color: var(--sidebar-color);
@@ -52,7 +49,6 @@ body, html {
   background: var(--accent-color); color: #000;
 }
 
-/* Main content */
 .main {
   flex-grow: 1; background: var(--main-bg);
   display: flex; flex-direction: column;
@@ -64,7 +60,6 @@ body, html {
   flex-grow: 1; padding: 2rem; overflow-y: auto;
 }
 
-/* Cards */
 .card {
   background: var(--card-bg);
   border-radius: 8px;
@@ -73,7 +68,6 @@ body, html {
   margin-bottom: 1.5rem;
 }
 
-/* Buttons */
 .btn,
 .btn--primary {
   display: inline-block;
@@ -101,10 +95,8 @@ body, html {
   filter: brightness(1.1);
 }
 
-/* Hidden helper */
 .hidden { display: none; }
 
-/* Settings form tweaks */
 .settings__current { margin-bottom: 1rem; }
 .settings__form { margin-top: 1rem; }
 .settings__input {
@@ -117,8 +109,6 @@ body, html {
   color: var(--text-color);
 }
 .settings__msg { margin-top: 1rem; color: var(--accent-color); }
-
-/* Stats boxes */
 .stats-container {
   display: flex;
   gap: 1rem;
@@ -149,7 +139,6 @@ body, html {
   background: linear-gradient(135deg, #00c6ff, #0072ff);
 }
 
-/* ===== Custom Modal Styles ===== */
 .modal-overlay {
   position: fixed;
   top:0; left:0;
@@ -160,7 +149,6 @@ body, html {
   justify-content: center;
   z-index: 1000;
 }
-/* Ensure the hidden class actually hides the overlay */
 .modal-overlay.hidden {
   display: none;
 }
